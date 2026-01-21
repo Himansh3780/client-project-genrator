@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUA Site Builder | Master Edition</title>
+    <title>MUA Site Builder | Master Edition v6</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #121212; color: #e0e0e0; display: flex; height: 100vh; margin: 0; overflow: hidden; }
         
         /* Sidebar */
-        .sidebar { width: 420px; background: #1e1e1e; padding: 30px; overflow-y: auto; border-right: 1px solid #333; display: flex; flex-direction: column; gap: 15px; }
+        .sidebar { width: 450px; background: #1e1e1e; padding: 30px; overflow-y: auto; border-right: 1px solid #333; display: flex; flex-direction: column; gap: 15px; }
         h2 { margin-top: 0; color: #fff; border-bottom: 2px solid #25d366; padding-bottom: 10px; }
         .section-title { font-size: 0.75rem; text-transform: uppercase; color: #25d366; font-weight: bold; margin-top: 20px; letter-spacing: 1px; }
         label { display: block; margin-bottom: 5px; font-size: 0.85rem; }
@@ -22,9 +22,10 @@
 
         /* Dynamic Inputs */
         .image-input-group { display: flex; gap: 5px; margin-bottom: 5px; }
-        .remove-btn { background: #ff4444; color: white; border: none; padding: 0 10px; cursor: pointer; border-radius: 4px; }
-        .add-btn { background: #333; color: #fff; border: 1px dashed #666; width: 100%; padding: 10px; cursor: pointer; margin-top: 5px; }
-        .add-btn:hover { background: #444; }
+        .faq-input-group, .btn-input-group { background: #252525; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 2px solid #25d366; }
+        .remove-btn { background: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 0.8rem; float: right; }
+        .add-btn { background: #333; color: #fff; border: 1px dashed #666; width: 100%; padding: 10px; cursor: pointer; margin-top: 5px; transition: 0.2s; }
+        .add-btn:hover { background: #444; border-color: #fff; }
 
         /* Generate Button */
         .gen-btn { background: #25d366; color: white; border: none; padding: 15px; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 20px; transition: 0.2s; position: sticky; bottom: 0; }
@@ -38,9 +39,9 @@
 <body>
 
     <div class="sidebar">
-        <h2>Site Builder Master</h2>
+        <h2>Site Builder Master v6</h2>
 
-        <div class="section-title">1. Buttons & Features</div>
+        <div class="section-title">1. Standard Buttons</div>
         <div class="toggle-row"> <label>Show "Secure Date" (Hero)</label> <input type="checkbox" id="show_hero" checked> </div>
         <div class="toggle-row"> <label>Show Gallery Button</label> <input type="checkbox" id="show_gallery" checked> </div>
         <div class="toggle-row"> <label>Show Packages (Prices)</label> <input type="checkbox" id="show_price" checked> </div>
@@ -52,45 +53,49 @@
         <div class="toggle-row"> <label>Show Countdown Bar</label> <input type="checkbox" id="show_countdown" checked> </div>
 
         <div class="section-title">2. Social Links (Leave empty to hide)</div>
-        <label>Instagram URL</label>
-        <input type="text" id="link_insta" value="https://instagram.com">
-        <label>TikTok URL</label>
-        <input type="text" id="link_tiktok" value="https://tiktok.com">
-        <label>YouTube URL</label>
-        <input type="text" id="link_youtube" value="https://youtube.com">
+        <label>Instagram URL</label> <input type="text" id="link_insta" value="https://instagram.com">
+        <label>TikTok URL</label> <input type="text" id="link_tiktok" value="https://tiktok.com">
+        <label>YouTube URL</label> <input type="text" id="link_youtube" value="https://youtube.com">
 
         <div class="section-title">3. Audio File</div>
-        <label>MP3 Link</label>
-        <input type="text" id="c_audio" value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+        <label>MP3 Link</label> <input type="text" id="c_audio" value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 
         <div class="section-title">4. Contact Details</div>
-        <label>Email Address</label>
-        <input type="text" id="c_email" value="booking@jessicaglam.com">
-        <label>Phone Display Text</label>
-        <input type="text" id="c_disp_phone" value="+1 (555) 123-4567">
-        <label>Location</label>
-        <input type="text" id="c_location" value="SoHo Studio, NYC">
+        <label>Email Address</label> <input type="text" id="c_email" value="booking@jessicaglam.com">
+        <label>Phone Display Text</label> <input type="text" id="c_disp_phone" value="+1 (555) 123-4567">
+        <label>Location</label> <input type="text" id="c_location" value="SoHo Studio, NYC">
 
         <div class="section-title">5. Basic Info</div>
-        <label>Client Name</label>
-        <input type="text" id="c_name" value="JESSICA GLAM">
-        <label>WhatsApp Number (No +)</label>
-        <input type="text" id="c_phone" value="1234567890">
-        <label>Status Text</label>
-        <input type="text" id="c_status" value="Status: In Studio">
+        <label>Client Name</label> <input type="text" id="c_name" value="JESSICA GLAM">
+        <label>WhatsApp Number (No +)</label> <input type="text" id="c_phone" value="1234567890">
+        <label>Status Text</label> <input type="text" id="c_status" value="Status: In Studio">
 
         <div class="section-title">6. Images</div>
-        <label>Profile Pic URL</label>
-        <input type="text" id="c_profile" value="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop">
-        <label>Background Video URL</label>
-        <input type="text" id="c_bg" value="https://assets.codepen.io/3364143/7btrrd.mp4">
+        <label>Profile Pic URL</label> <input type="text" id="c_profile" value="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop">
+        <label>Background Video URL</label> <input type="text" id="c_bg" value="https://assets.codepen.io/3364143/7btrrd.mp4">
 
         <div class="section-title">7. Gallery Images</div>
         <div id="gallery-container">
-            <div class="image-input-group"><input type="text" class="gallery-url" value="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop"></div>
-            <div class="image-input-group"><input type="text" class="gallery-url" value="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=300&h=300&fit=crop"></div>
+            <div class="image-input-group"><input type="text" class="gallery-url" value="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop"><button class="remove-btn" onclick="this.parentElement.remove()">X</button></div>
+            <div class="image-input-group"><input type="text" class="gallery-url" value="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=300&h=300&fit=crop"><button class="remove-btn" onclick="this.parentElement.remove()">X</button></div>
         </div>
         <button class="add-btn" onclick="addGalleryInput()">+ Add Another Image</button>
+
+        <div class="section-title">8. Custom Buttons</div>
+        <div id="custom-btn-container">
+            </div>
+        <button class="add-btn" onclick="addCustomBtnInput()">+ Add Custom Link</button>
+
+        <div class="section-title">9. FAQ Manager</div>
+        <div id="faq-container">
+            <div class="faq-input-group">
+                <input type="text" class="faq-q" placeholder="Question" value="Do you travel?">
+                <textarea class="faq-a" placeholder="Answer" rows="2">Yes! I travel worldwide.</textarea>
+                <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+            </div>
+        </div>
+        <button class="add-btn" onclick="addFaqInput()">+ Add FAQ</button>
+
 
         <button class="gen-btn" onclick="generateCode()">GENERATE WEBSITE CODE</button>
     </div>
@@ -104,6 +109,7 @@
     </div>
 
     <script>
+        // --- ADDERS ---
         function addGalleryInput() {
             const container = document.getElementById('gallery-container');
             const div = document.createElement('div');
@@ -112,6 +118,32 @@
             container.appendChild(div);
         }
 
+        function addFaqInput() {
+            const container = document.getElementById('faq-container');
+            const div = document.createElement('div');
+            div.className = 'faq-input-group';
+            div.innerHTML = `
+                <input type="text" class="faq-q" placeholder="Question">
+                <textarea class="faq-a" placeholder="Answer" rows="2"></textarea>
+                <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function addCustomBtnInput() {
+            const container = document.getElementById('custom-btn-container');
+            const div = document.createElement('div');
+            div.className = 'btn-input-group';
+            div.innerHTML = `
+                <input type="text" class="c-btn-text" placeholder="Button Label (e.g. My Amazon Store)">
+                <input type="text" class="c-btn-link" placeholder="Link URL (e.g. https://amazon.com)">
+                <input type="text" class="c-btn-icon" placeholder="Icon Class (e.g. fas fa-shopping-cart)" value="fas fa-link">
+                <button class="remove-btn" onclick="this.parentElement.remove()">Remove Button</button>
+            `;
+            container.appendChild(div);
+        }
+
+        // --- GENERATOR ---
         function generateCode() {
             // Toggles
             const showHero = document.getElementById('show_hero').checked;
@@ -150,6 +182,27 @@
             let galleryHTML = "";
             document.querySelectorAll('.gallery-url').forEach(input => {
                 if(input.value.trim() !== "") galleryHTML += `<img src="${input.value}" class="gallery-img">`;
+            });
+
+            // Build FAQ Loop
+            let faqHTML = "";
+            document.querySelectorAll('.faq-input-group').forEach(group => {
+                const q = group.querySelector('.faq-q').value;
+                const a = group.querySelector('.faq-a').value;
+                if(q.trim() !== "") {
+                    faqHTML += `<div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">${q} <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>${a}</p></div></div>`;
+                }
+            });
+
+            // Build Custom Buttons Loop
+            let customBtnsHTML = "";
+            document.querySelectorAll('.btn-input-group').forEach(group => {
+                const text = group.querySelector('.c-btn-text').value;
+                const link = group.querySelector('.c-btn-link').value;
+                const icon = group.querySelector('.c-btn-icon').value;
+                if(text.trim() !== "") {
+                    customBtnsHTML += `<a href="${link}" class="std-btn" target="_blank"><span>${text}</span> <i class="${icon}"></i></a>`;
+                }
             });
 
             // Conditionals
@@ -267,6 +320,7 @@
             ${galleryBtn}
             ${priceBtn}
             ${productBtn}
+            ${customBtnsHTML}
             ${faqBtn}
             ${contactBtn}
         </div>
@@ -346,14 +400,7 @@
         <div class="modal-card" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal('faqModal')">&times;</span>
             <div class="modal-title">FAQ</div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">Do you travel? <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-answer"><p>Yes! I travel worldwide.</p></div>
-            </div>
-             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">Deposit required? <i class="fas fa-chevron-down"></i></button>
-                <div class="faq-answer"><p>Yes, 50% retainer is required.</p></div>
-            </div>
+            ${faqHTML}
         </div>
     </div>
 
