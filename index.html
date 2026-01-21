@@ -3,41 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUA Site Generator | Studio Edition v9</title>
+    <title>MUA Site Generator | v10 Smooth Loop</title>
     <style>
         /* --- ADMIN PANEL STYLES --- */
         body { font-family: 'Segoe UI', sans-serif; background-color: #0f0f0f; color: #e0e0e0; display: flex; height: 100vh; margin: 0; overflow: hidden; }
-        
-        /* SIDEBAR */
         .sidebar { width: 500px; background: #181818; padding: 25px; overflow-y: auto; border-right: 1px solid #333; display: flex; flex-direction: column; gap: 15px; }
         .sidebar::-webkit-scrollbar { width: 8px; }
         .sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
         h2 { margin-top: 0; color: #fff; border-bottom: 2px solid #d4af37; padding-bottom: 15px; font-size: 1.2rem; letter-spacing: 1px; }
         .section-title { font-size: 0.75rem; text-transform: uppercase; color: #d4af37; font-weight: bold; margin-top: 30px; letter-spacing: 1.5px; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px; }
-        
         label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #aaa; }
         input[type="text"], input[type="color"], textarea, select { width: 100%; padding: 12px; background: #252525; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 10px; font-family: monospace; font-size: 0.9rem; transition: 0.2s; }
         input:focus, textarea:focus { outline: none; border-color: #d4af37; background: #2a2a2a; }
         input[type="color"] { height: 40px; cursor: pointer; padding: 2px; }
-
-        /* DYNAMIC GROUP BOXES */
         .dynamic-group { background: #202020; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #d4af37; position: relative; }
         .remove-btn { position: absolute; top: 5px; right: 5px; background: transparent; color: #ff5555; border: none; cursor: pointer; font-size: 1.2rem; }
         .add-btn { background: #252525; color: #d4af37; border: 1px dashed #d4af37; width: 100%; padding: 12px; cursor: pointer; margin-top: 5px; border-radius: 6px; font-weight: 600; transition: 0.2s; }
         .add-btn:hover { background: #d4af37; color: #000; }
-
-        /* TOGGLES */
         .toggle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .toggle-row { display: flex; justify-content: space-between; align-items: center; background: #252525; padding: 10px; border-radius: 6px; border: 1px solid #333; }
         .toggle-row label { margin: 0; cursor: pointer; font-size: 0.75rem; color: #fff; }
         input[type="checkbox"] { transform: scale(1.2); cursor: pointer; accent-color: #d4af37; }
-
-        /* GENERATE BUTTON */
         .gen-btn { background: linear-gradient(135deg, #d4af37, #aa8a2e); color: #000; border: none; padding: 18px; font-size: 1rem; font-weight: 800; cursor: pointer; border-radius: 8px; margin-top: 30px; transition: 0.3s; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); text-transform: uppercase; letter-spacing: 1px; }
         .gen-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
-
-        /* PREVIEW AREA */
         .preview { flex: 1; padding: 30px; display: flex; flex-direction: column; background: #111; }
         .preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .copy-btn { background: #333; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: 600; transition: 0.2s; }
@@ -48,7 +36,7 @@
 <body>
 
     <div class="sidebar">
-        <h2>✨ Studio Site Generator v9</h2>
+        <h2>✨ Studio Generator v10 (Smooth Loop)</h2>
 
         <div class="section-title">1. Branding</div>
         <label>Theme Color</label> <input type="color" id="c_theme" value="#d4af37">
@@ -172,13 +160,14 @@
             const sFaq = document.getElementById('show_faq').checked;
 
             // LOOPS & BUILDERS
-            // 1. Gallery
+            // 1. Gallery - NOW WITH FORCE LOOP
             let galleryContent = "";
             document.querySelectorAll('.gal-url').forEach(el => {
                 let url = el.value.trim();
                 if(url) {
                     if(url.match(/\.(mp4|webm|ogg)$/i)) {
-                        galleryContent += `<video class="gallery-img" autoplay muted loop playsinline><source src="${url}" type="video/mp4"></video>`;
+                        // Added onended="this.play()" to force loop
+                        galleryContent += `<video class="gallery-img" autoplay muted loop playsinline onended="this.play()"><source src="${url}" type="video/mp4"></video>`;
                     } else {
                         galleryContent += `<img src="${url}" class="gallery-img">`;
                     }
@@ -232,7 +221,6 @@
             const prodBtn = sProd ? `<div class="std-btn" onclick="openModal('productModal')"><span>The Toolkit</span> <i class="fas fa-star"></i></div>` : '';
             const faqBtn = sFaq ? `<div class="std-btn" onclick="openModal('faqModal')"><span>Common Questions</span> <i class="fas fa-question-circle"></i></div>` : '';
             const contactBtn = sContact ? `<div class="std-btn" onclick="openModal('contactModal')"><span>Inquire / Contact</span> <i class="fas fa-paper-plane"></i></div>` : '';
-            
             const audioHTML = sAudio ? `<div class="audio-player"><div class="play-btn" onclick="toggleAudio()"><i class="fas fa-play" id="playIcon"></i></div><div class="audio-wave"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><span class="audio-text">Listen to Welcome Note</span><audio id="myAudio" src="${audio}"></audio></div>` : '';
             const waHTML = sWa ? `<a href="#" onclick="openWhatsAppDirect()" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>` : '';
             const countHTML = sCount ? `<div class="countdown-bar"><span>🔥 Limited Availability for 2025</span></div>` : '';
@@ -320,7 +308,7 @@
 </head>
 <body>
     <div class="overlay"></div>
-    <video class="video-bg" autoplay muted loop playsinline>
+    <video class="video-bg" autoplay muted loop playsinline id="bgVideo">
         <source src="${bg}" type="video/mp4">
     </video>
     ${countHTML}
@@ -428,6 +416,17 @@
     <script>
         const ARTIST_NUMBER = "${phone}";
 
+        // FORCE LOOP FIX
+        document.addEventListener('DOMContentLoaded', function() {
+            var bgVid = document.getElementById('bgVideo');
+            if(bgVid) {
+                bgVid.addEventListener('ended', function() {
+                    this.currentTime = 0;
+                    this.play();
+                }, false);
+            }
+        });
+
         function sendToWhatsapp(e) {
             e.preventDefault();
             let name = document.getElementById('wa-name').value;
@@ -465,7 +464,7 @@
             const copyText = document.getElementById("outputCode");
             copyText.select();
             document.execCommand("copy");
-            alert("Code Copied!");
+            alert("Code Copied! Save as .html file.");
         }
     </script>
 </body>
